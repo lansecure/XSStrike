@@ -32,6 +32,10 @@ def wafDetector(url, params, headers, GET, delay, timeout):
             WAF_Name = 'Cloudflare'
         elif 'AkamaiGHost' in response_headers:
             WAF_Name = 'AkamaiGhost'
-        elif code == '403': # if the http response code is 403
+        elif code == '407': # if the http response code is 407 (RWeb default)
+            WAF_Name = 'DenyAll RWeb'
+        elif code == '403': # if the http response code is 403 (Beeware default)
+            WAF_Name = 'iSuite/DenyAll Waf/RS WAF'
+        else :
             WAF_Name = 'Unknown'
     return WAF_Name
